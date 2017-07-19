@@ -1,5 +1,10 @@
 package action;
 
+import java.io.File;
+
+import org.apache.log4j.Logger;
+import org.apache.struts2.ServletActionContext;
+
 import com.opensymphony.xwork2.ActionSupport;
 
 public class UpdateAction extends ActionSupport {
@@ -11,6 +16,7 @@ public class UpdateAction extends ActionSupport {
 
 	private String appid;
 
+	
 	public String getAppid() {
 		return appid;
 	}
@@ -18,12 +24,16 @@ public class UpdateAction extends ActionSupport {
 	public void setAppid(String appid) {
 		this.appid = appid;
 	}
+	
+	//get log4j
+	private static final Logger logger = Logger.getLogger(UpdateAction.class);
 
 	@Override
 	public String execute() throws Exception {
 		// TODO Auto-generated method stub
 		System.out.println(appid);
-		return super.execute();
+		logger.info(appid);
+		return "success";
 	}
 	
 //	

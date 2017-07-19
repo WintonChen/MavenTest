@@ -2,11 +2,33 @@
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN" "http://struts.apache.org/dtds/struts-2.5.dtd">
 <struts>
 
+	<constant name="struts.devMode" value="true" />
 
-	<package name="basePackage">
-		<action name="UpdateAction" class="action.UpdateAction">
-                <result name="success">/index.jsp</result>
-        </action>
+	<package name="base" extends="struts-default">
+		<action name="index">
+			<result>/index.jsp</result>
+		</action>
+
+		<action name="update" class="action.UpdateAction" method="execute">
+			<result name="success">/json/update.json</result>
+		</action>
+
+
+		<action name="fileUploadAction" class="action.FileUploadAction"
+			method="display">
+			<result name="none">/fileupload.jsp</result>
+		</action>
+
+		<action name="resultAction" class="action.FileUploadAction">
+			<interceptor-ref name="basicStack"></interceptor-ref>
+			<interceptor-ref name="fileUpload">
+				<param name="allowedTypes">image/jpeg,image/gif,application/octet-stream</param>
+			</interceptor-ref>
+
+			<result name="success">/result.jsp</result>
+			<result name="input">/fileupload.jsp</result>
+
+		</action>
 	</package>
 
 </struts>
