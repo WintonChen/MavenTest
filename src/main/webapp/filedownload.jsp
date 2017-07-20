@@ -1,12 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
     
-    <title>My JSP 'good_result.jsp' starting page</title>
+    <title>My JSP 'filedownload.jsp' starting page</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -20,14 +19,8 @@
   </head>
   
   <body>
-    This is my JSP page. <br>
-    <h2>
-    	File Name :
-		<s:property value="filename" />
-    </h2>
-    <h2>
-		Content Type :
-		<s:property value="contentType" />
-	</h2>
+    
+    <h1>Struts 2 download file example</h1>
+    
   </body>
 </html>

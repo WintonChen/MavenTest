@@ -26,8 +26,30 @@ public class UploadAction extends ActionSupport {
 		this.filename = filename;
 	}
 
+	
+	
+	
+	public String getContentType() {
+		return contentType;
+	}
+
+	public void setContentType(String contentType) {
+		this.contentType = contentType;
+	}
+
+	public String getFilename() {
+		return filename;
+	}
+
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
+
+
+
+
 	// get log4j
-	private static final Logger logger = Logger.getLogger(UpdateAction.class);
+	private static final Logger logger = Logger.getLogger(UploadAction.class);
 
 	public String execute() throws Exception{
 		// ...
@@ -43,7 +65,7 @@ public class UploadAction extends ActionSupport {
 		prop.load(in);
 		// 获取真实物理路径
 		String realPath = prop.getProperty("realPath").trim();
-
+		logger.info("realPath:"+realPath);
 		// 获取属性
 		File file = new File(realPath);
 		if (!file.exists()) {

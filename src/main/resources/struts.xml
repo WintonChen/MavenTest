@@ -3,9 +3,9 @@
 <struts>
 
 	<constant name="struts.devMode" value="true" />
-    <constant name="struts.i18n.encoding" value="UTF-8"/>
-    <!-- 文件最大 1G -->
-	<constant name="struts.multipart.maxSize" value="1073741824"/>
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+	<!-- 文件最大 1G -->
+	<constant name="struts.multipart.maxSize" value="1073741824" />
 
 	<package name="base" extends="struts-default">
 		<action name="index">
@@ -16,14 +16,30 @@
 			<result name="success">/json/update.json</result>
 		</action>
 
+		<action name="upload">
+			<result>/fileupload.jsp</result>
+		</action>
 
 
 		<action name="doUpload" class="action.UploadAction">
 			<result name="success">good_result.jsp</result>
 		</action>
 
-		<action name="upload" class="action.UploadAction" method="display">
-			<result name="none">/fileupload.jsp</result>
+
+		<action name="download">
+			<result>/filedownload.jsp</result>
+		</action>
+
+		<action name="doDownload" class="action.DownLoadAction">
+			<result name="success" type="stream">
+				<param name="contentType">${type}</param>
+				<param name="inputName">fileInputStream</param>
+				<param name="contentDisposition">
+				attachment;
+				filename= ${fileName}
+				</param> 
+				<param name="bufferSize">1024</param>
+			</result>
 		</action>
 
 	</package>
