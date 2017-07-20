@@ -10,6 +10,11 @@ import org.apache.log4j.Logger;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class UploadAction extends ActionSupport {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1826854740015330482L;
+	
 	private File uploadFile;
 	private String contentType;
 	private String filename;
@@ -77,9 +82,4 @@ public class UploadAction extends ActionSupport {
 
 		return SUCCESS;
 	}
-	
-	public String display() throws Exception{
-		return NONE;
-	}
-	
 }

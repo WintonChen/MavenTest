@@ -1,9 +1,6 @@
 package action;
 
-import java.io.File;
-
 import org.apache.log4j.Logger;
-import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -33,7 +30,7 @@ public class UpdateAction extends ActionSupport {
 		// TODO Auto-generated method stub
 		System.out.println(appid);
 		logger.info(appid);
-		return "success";
+		return SUCCESS;
 	}
 	
 //	
