@@ -3,6 +3,9 @@
 <struts>
 
 	<constant name="struts.devMode" value="true" />
+    <constant name="struts.i18n.encoding" value="UTF-8"/>
+    <!-- 文件最大 1G -->
+	<constant name="struts.multipart.maxSize" value="1073741824"/>
 
 	<package name="base" extends="struts-default">
 		<action name="index">
@@ -14,21 +17,15 @@
 		</action>
 
 
-		<action name="fileUploadAction" class="action.FileUploadAction"
-			method="display">
+
+		<action name="doUpload" class="action.UploadAction">
+			<result name="success">good_result.jsp</result>
+		</action>
+
+		<action name="upload" class="action.UploadAction" method="display">
 			<result name="none">/fileupload.jsp</result>
 		</action>
 
-		<action name="resultAction" class="action.FileUploadAction">
-			<interceptor-ref name="basicStack"></interceptor-ref>
-			<interceptor-ref name="fileUpload">
-				<param name="allowedTypes">image/jpeg,image/gif,application/octet-stream</param>
-			</interceptor-ref>
-
-			<result name="success">/result.jsp</result>
-			<result name="input">/fileupload.jsp</result>
-
-		</action>
 	</package>
 
 </struts>
