@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+  
+ <configuration>
+	<typeAliases> 
+        <typeAlias alias="Projects" type="com.wd.model.Projects"/> 
+    </typeAliases> 
+    
+    
+    <environments default="development">
+       <environment id="development">
+        <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+            <property name="driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
+            <property name="url" value="jdbc:sqlserver://localhost:1433;database=UpdateServer;integratedSecurity=false" />
+            <property name="username" value="ups"/>
+            <property name="password" value="f5gubS0ZYG"/>
+            </dataSource>
+        </environment>
+    </environments>
+    
+	<mappers>
+		<mapper resource="com/wd/model/Projects.xml"/>
+	</mappers>
+</configuration>

@@ -9,19 +9,28 @@ http://www.springframework.org/schema/context
 http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
 	<!-- 引入属性文件 -->
-	<context:property-placeholder location="classpath:config.properties" />
+	<context:property-placeholder location="classpath:jdbc.properties"/>
 
 	<!-- 自动扫描dao和service包(自动注入) -->
 	<context:component-scan base-package="com.wd.dao,com.wd.service" />
 
 
+    <bean id="dataSource" 
+    class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value = "${jdbc.driver}" />
+		<property name="url" value= "${jdbc.url}"/>
+		<property name="username" value= "${jdbc.username}" />
+		<property name="password" value= "${jdbc.password}" />
+	</bean>
+
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-    <property name="dataSource" ref="dataSource" />
+    	<property name="dataSource" ref="dataSource" />
     </bean>
     
+
     <bean id="projectsMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-  <property name="mapperInterface" value="com.wd.mapper.ProjectsMapper" />
-  <property name="sqlSessionFactory" ref="sqlSessionFactory" />
-</bean>
+  		<property name="mapperInterface" value="com.wd.mapper.ProjectsMapper" />
+  		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+  	</bean>
     
 </beans>
