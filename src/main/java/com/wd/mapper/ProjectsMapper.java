@@ -8,4 +8,7 @@ import com.wd.model.Projects;
 public interface ProjectsMapper {
 	 @Select("SELECT * FROM projects WHERE appid = #{appid}")
 	 Projects getProjects(@Param("appid") String appid);
+	 
+	 
+	 Projects selectOne(@Param("appid") String appid);
 }
