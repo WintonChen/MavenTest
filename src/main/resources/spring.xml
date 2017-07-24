@@ -12,25 +12,37 @@ http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 	<context:property-placeholder location="classpath:jdbc.properties"/>
 
 	<!-- 自动扫描dao和service包(自动注入) -->
-	<context:component-scan base-package="com.wd.dao,com.wd.service" />
+	<context:component-scan base-package="com.wd.dao,com.wd.dao，mapper,com.wd.service" />
 
 
     <bean id="dataSource" 
     class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value = "${jdbc.driver}" />
-		<property name="url" value= "${jdbc.url}"/>
-		<property name="username" value= "${jdbc.username}" />
-		<property name="password" value= "${jdbc.password}" />
+		<property name="driverClassName" value = "com.microsoft.sqlserver.jdbc.SQLServerDriver" />
+		<property name="url" value= "jdbc:sqlserver://localhost:1433;database=UpdateServer;integratedSecurity=false"/>
+		<property name="username" value= "ups" />
+		<property name="password" value= "f5gubS0ZYG" />
 	</bean>
 
-	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-    	<property name="dataSource" ref="dataSource" />
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+  		<property name="dataSource" ref="dataSource" />
+  		<property name="configLocation" value="classpath:mybatis.xml"/>   
+  		<property name="mapperLocations" value="classpath*:mapper/*.xml" />
+  		
+  		<!-- 事务管理 -->
+  		<property name="transactionFactory">
+    		<bean class="org.apache.ibatis.transaction.managed.ManagedTransactionFactory" />
+  		</property>  
+  		
+	</bean>
+    
+    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+  		<constructor-arg index="0" ref="sqlSessionFactory" />
+  		<!-- 批量 SqlSession -->
+  		<constructor-arg index="1" value="BATCH" />  
     </bean>
     
-
-    <bean id="projectsMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-  		<property name="mapperInterface" value="com.wd.mapper.ProjectsMapper" />
-  		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
-  	</bean>
-    
+    <bean id="projectsDao" class="com.wd.dao.impl.ProjectsDaoImpl">
+     	<property name="sqlSession" ref="sqlSession" /> 
+    </bean>  
+          
 </beans>

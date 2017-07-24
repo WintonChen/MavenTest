@@ -13,14 +13,15 @@ public class ProjectsServiceImpl implements ProjectsService {
 
 	private static final Logger logger = Logger.getLogger(ProjectsServiceImpl.class);
 	
-	@Autowired
-	private ProjectsMapper projectsMapper;
+//	@Autowired
+//	private ProjectsMapper projectsMapper;
 	
 	@Override
 	public Projects queryById(String appid) {
 		// TODO Auto-generated method stub
 		logger.info("queryById:"+appid);
-		return projectsMapper.getProjects(appid);
+//		return projectsMapper.getProjects(appid);
+		return null;
 	}
 
 }

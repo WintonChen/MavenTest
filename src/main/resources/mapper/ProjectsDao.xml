@@ -2,21 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.wd.mapper.ProjectsMapper">
-    <select id="selectOne" parameterType="String" resultType="projects">
+<mapper namespace="com.wd.dao.ProjectsDao">
+    <select id="selectOne" parameterType="String" resultType="Projects">
         select * from projects where appid = #{appid}
     </select>
     
-     <select id="selectList" resultType="projects">
+     <select id="selectList" resultType="Projects">
         select * from projects
     </select>
     
-    <insert id="insert" parameterType="projects">
+    <insert id="insert" parameterType="Projects">
     	insert into projects (appid,name,icon,platform,type,info,time,creator ) 
     	values (#{appid},#{name},#{icon},#{platform},#{type},#{info},#{time},#{creator})
     </insert>
     
-    <update id="update" parameterType="projects">
+    <update id="update" parameterType="Projects">
     	update projects set
     	appid = #{appid},
     	name = #{name},
