@@ -25,8 +25,7 @@ public class ProjectsDaoImpl implements ProjectsDao {
 
 	@Override
 	public List<Projects> selectList() {
-		// TODO Auto-generated method stub
-		return null;
+		return  sqlSession.selectList("com.wd.dao.ProjectsDao.selectList");
 	}
 
 	@Override
