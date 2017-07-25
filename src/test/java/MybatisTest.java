@@ -54,7 +54,7 @@ public class MybatisTest {
 
 		try {
 			ProjectsMapper projectsMapper = session.getMapper(ProjectsMapper.class);
-			Projects projects = projectsMapper.getProjects("jxc001");
+			Projects projects = projectsMapper.selectOne("jxc001");
 			System.out.println(projects.getAppid());
 			System.out.println(projects.getName());
 		} catch (Exception e) {

@@ -41,14 +41,23 @@ http://www.springframework.org/schema/context/spring-context-4.3.xsd">
   		<constructor-arg index="1" value="BATCH" />  
     </bean>
     
-    <bean id="projectsDao" class="com.wd.dao.impl.ProjectsDaoImpl">
-     	<property name="sqlSession" ref="sqlSession" /> 
-    </bean>  
+
     
-	<bean id="projectsMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-  		<property name="mapperInterface" value="com.wd.mapper.ProjectsMapper" />
-  		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    <!-- 4.配置扫描Dao接口包，动态实现Dao接口，注入到spring容器中 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<!-- 注入sqlSessionFactory -->
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+		<!-- 给出需要扫描Dao接口包 -->
+		<property name="basePackage" value="com.wd.mapper,com.wd.dao" />
 	</bean>
+          
+          
+    <!-- SpringMVC -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+      <property name="prefix" value="/WEB-INF/jsp/" />
+      <property name="suffix" value=".jsp" />
+   </bean>     
+     
     
           
 </beans>

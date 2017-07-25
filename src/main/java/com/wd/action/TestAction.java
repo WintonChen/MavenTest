@@ -38,7 +38,7 @@ public class TestAction extends ActionSupport{
 		System.out.println(appid);
 		logger.info(appid);
 		
-		Projects projects = projectsMapper.getProjects(appid);
+		Projects projects = projectsMapper.selectOne(appid);
 		
 		logger.info("name"+projects.getName());
 		
