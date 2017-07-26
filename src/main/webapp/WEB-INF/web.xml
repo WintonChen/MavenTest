@@ -9,20 +9,11 @@
 
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:spring.xml</param-value>
+		<param-value>
+		classpath:spring.xml
+		</param-value>
 	</context-param>
 
-
-	<!-- Struts2 -->
-	<filter>
-		<filter-name>struts2</filter-name>
-		<filter-class>org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter</filter-class>
-	</filter>
-
-	<filter-mapping>
-		<filter-name>struts2</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
 
 	<!-- Spring -->
 	<listener>
@@ -40,7 +31,7 @@
 
    <servlet-mapping>
       <servlet-name>mvc-dispatcher</servlet-name>
-      <url-pattern>*.jsp</url-pattern>
+      <url-pattern>/</url-pattern>
    </servlet-mapping>
 	
 

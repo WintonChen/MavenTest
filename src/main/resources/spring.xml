@@ -61,13 +61,6 @@ http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 		<property name="basePackage" value="com.wd.mapper,com.wd.dao" />
 	</bean>
           
-          
-    <!-- SpringMVC -->
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-      <property name="prefix" value="/WEB-INF/jsp/" />
-      <property name="suffix" value=".jsp" />
-   </bean>     
-     
     
           
 </beans>
