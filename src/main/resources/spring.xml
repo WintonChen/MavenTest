@@ -14,13 +14,23 @@ http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 	<!-- 自动扫描dao和service包(自动注入) -->
 	<context:component-scan base-package="com.wd.dao,com.wd.mapper,com.wd.service" />
 
-
+	<!-- 数据库连接池 -->
     <bean id="dataSource" 
-    class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value = "com.microsoft.sqlserver.jdbc.SQLServerDriver" />
-		<property name="url" value= "jdbc:sqlserver://localhost:1433;database=UpdateServer;integratedSecurity=false"/>
-		<property name="username" value= "ups" />
+    class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value = "com.microsoft.sqlserver.jdbc.SQLServerDriver" />
+		<property name="jdbcUrl" value= "jdbc:sqlserver://localhost:1433;database=UpdateServer;integratedSecurity=false"/>
+		<property name="user" value= "ups" />
 		<property name="password" value= "f5gubS0ZYG" />
+		
+		<!-- c3p0连接池的私有属性 -->
+		<property name="maxPoolSize" value="30" />
+		<property name="minPoolSize" value="10" />
+		<!-- 关闭连接后不自动commit -->
+		<property name="autoCommitOnClose" value="false" />
+		<!-- 获取连接超时时间 -->
+		<property name="checkoutTimeout" value="10000" />
+		<!-- 当获取连接失败重试次数 -->
+		<property name="acquireRetryAttempts" value="2" />
 	</bean>
 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
