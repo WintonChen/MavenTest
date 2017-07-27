@@ -41,7 +41,7 @@ public class FileDownloadController {
 				prop.load(in);
 				// 获取真实物理路径
 				String realPath = prop.getProperty("realPath").trim();
-
+ 
 				File file = new File(realPath, fileName);
 
 				if (file.exists()) {
