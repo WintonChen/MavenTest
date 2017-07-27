@@ -30,4 +30,13 @@ public class ProjectsServiceImpl implements ProjectsService {
 		return list;
 	}
 
+
+
+
+	@Override
+	public Projects getProjectsByAppid(String appid) {
+		Projects projects = projectsDao.selectOne(appid);
+		return projects;
+	}
+
 }
