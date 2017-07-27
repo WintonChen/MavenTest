@@ -1,8 +1,15 @@
 package com.wd.model;
 
+import javax.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class Projects {
 
+	@Pattern(regexp="(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{5,10}")
 	private String appid;
+	
+	@NotEmpty
 	private String name;
 	private String icon;
 	private String platform;
@@ -10,6 +17,8 @@ public class Projects {
 	private String info;
 	private String time;
 	private String creator;
+	
+	
 	public String getAppid() {
 		return appid;
 	}

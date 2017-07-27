@@ -13,4 +13,10 @@ public class HelloController {
 		model.addAttribute("message", "Hello Spring MVC Framework!");
 		return "hello";
 	}
+	
+	@RequestMapping(value = "/helloview", method = RequestMethod.GET)
+	public String printHelloView(ModelMap model) {
+		model.addAttribute("message", "Hello Spring MVC Framework! helloview ");
+		return "hello";
+	}
 }
