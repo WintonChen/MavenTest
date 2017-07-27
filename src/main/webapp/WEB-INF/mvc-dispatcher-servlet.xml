@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xsi:schemaLocation="
    http://www.springframework.org/schema/beans     
    http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
@@ -13,20 +12,15 @@
 
 	<!-- 配置SpringMVC -->
 	<!-- 1.开启SpringMVC注解模式 -->
-	<!-- 简化配置： 
-		(1)自动注册DefaultAnootationHandlerMapping,AnotationMethodHandlerAdapter 
-		(2)提供一些列：数据绑定，数字和日期的format @NumberFormat, @DateTimeFormat, xml,json默认读写支持 
-	-->
+	<!-- 简化配置： (1)自动注册DefaultAnootationHandlerMapping,AnotationMethodHandlerAdapter 
+		(2)提供一些列：数据绑定，数字和日期的format @NumberFormat, @DateTimeFormat, xml,json默认读写支持 -->
 	<mvc:annotation-driven />
-	
-	<!-- 2.静态资源默认servlet配置
-		(1)加入对静态资源的处理：js,gif,png
-		(2)允许使用"/"做整体映射
-	 -->
-	<mvc:default-servlet-handler/>
 
-   <!-- 配置静态资源 -->
-   <mvc:resources location="/static/" mapping="/static/**" />
+	<!-- 2.静态资源默认servlet配置 (1)加入对静态资源的处理：js,gif,png (2)允许使用"/"做整体映射 -->
+	<mvc:default-servlet-handler />
+
+	<!-- 配置静态资源 -->
+	<mvc:resources location="/static/" mapping="/static/**" />
 
 	<!-- 3.配置jsp 显示ViewResolver -->
 	<bean
@@ -39,10 +33,9 @@
 	<context:component-scan base-package="com.wd.controller" />
 
 	<!-- 5.支持文件上传 -->
-	 <bean id="multipartResolver"
-        class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
-        
-     <!-- 6.控制器类名称自动处理映射    没什么用吧  过时了-->
-     <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>
-     
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+
+
+
 </beans>
