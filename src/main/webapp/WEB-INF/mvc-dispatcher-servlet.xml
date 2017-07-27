@@ -41,4 +41,8 @@
 	<!-- 5.支持文件上传 -->
 	 <bean id="multipartResolver"
         class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+        
+     <!-- 6.控制器类名称自动处理映射    没什么用吧  过时了-->
+     <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>
+     
 </beans>
