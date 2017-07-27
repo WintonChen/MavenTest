@@ -19,14 +19,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.wd.action.UploadAction;
 import com.wd.model.FileModel;
 
 @Controller
 public class FileUploadController {
 	
 	// get log4j
-	private static final Logger logger = Logger.getLogger(UploadAction.class);
+	private static final Logger logger = Logger.getLogger(FileUploadController.class);
 
 	@Autowired
 	ServletContext context;
