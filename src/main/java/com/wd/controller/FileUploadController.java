@@ -7,7 +7,6 @@ import java.util.Properties;
 
 import javax.servlet.ServletContext;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -65,9 +64,15 @@ public class FileUploadController {
 			MultipartFile multipartFile = file.getFile();
 			
 			// Now do something with file...
-			FileCopyUtils.copy(file.getFile().getBytes(), new File(realPath + file.getFile().getOriginalFilename()));
+			FileCopyUtils.copy(file.getFile().getBytes(), new File(realPath + File.separator + file.getFile().getOriginalFilename()));
 			String fileName = multipartFile.getOriginalFilename();
 			model.addAttribute("fileName", fileName);
+			
+			logger.info(multipartFile.getOriginalFilename());
+			logger.info(multipartFile.getName());
+			logger.info(multipartFile.getSize());
+			logger.info(multipartFile.toString());
+			
 			return "success";
 		}
 	}
