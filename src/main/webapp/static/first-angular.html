@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>first-angular.html</title>
+
+<meta name="keywords" content="keyword1,keyword2,keyword3">
+<meta name="description" content="this is my page">
+<meta name="content-type" content="text/html; charset=UTF-8">
+
+<!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+<script src="../js/angular.min.js"></script>
+</head>
+
+<body ng-app="myapp">
+	<div ng-controller="HelloController">
+		<h2>你好 ！第一个{{helloTo.title}}程序示例</h2>
+	</div>
+	<script>
+		angular.module("myapp", [])
+			.controller("HelloController", function($scope) {
+				$scope.helloTo = {};
+				$scope.helloTo.title = "AngularJS";
+			});
+	</script>
+
+
+	<h1>Sample Application</h1>
+	<div ng-app=""
+		ng-init="quantity=1;cost=30; student={firstname:'李',lastname:'刚',rollno:101};marks=[82,91,78,77,64]">
+		<p>Hello {{student.firstname + " " + student.lastname}}!</p>
+		<p>Expense on Books : {{cost * quantity}} Rs</p>
+		<p>Roll No: {{student.rollno}}</p>
+		<p>Marks(Math): {{marks[3]}}</p>
+	</div>
+
+
+	
+
+</body>
+</html>
