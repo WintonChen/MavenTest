@@ -6,6 +6,8 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.wd.dao.ProjectsDao;
 import com.wd.model.Projects;
 import com.wd.service.ProjectsService;
@@ -38,4 +40,16 @@ public class ProjectsServiceImpl implements ProjectsService {
 		return projects;
 	}
 
+
+
+	@Override
+	public PageInfo<Projects> getProjectsByPage(Integer pageNum, Integer pageSize) {
+		// TODO Auto-generated method stub
+		PageHelper.startPage(pageNum, pageSize); //开始分页
+		List<Projects> list = projectsDao.selectList(); //查询操作
+		PageInfo<Projects> pageInfo = new PageInfo<>(list);
+		return pageInfo;
+	}
+
+	
 }

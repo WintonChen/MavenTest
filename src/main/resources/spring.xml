@@ -42,7 +42,7 @@ http://www.springframework.org/schema/context/spring-context-4.3.xsd">
   		<property name="transactionFactory">
     		<bean class="org.apache.ibatis.transaction.managed.ManagedTransactionFactory" />
   		</property>  
-  		
+  	
 	</bean>
     
     <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
@@ -61,6 +61,8 @@ http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 		<property name="basePackage" value="com.wd.dao" />
 	</bean>
           
+          
+ 
     
           
 </beans>

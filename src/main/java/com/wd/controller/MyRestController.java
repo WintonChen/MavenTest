@@ -1,6 +1,8 @@
 package com.wd.controller;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +23,11 @@ public class MyRestController {
 		return projectsService.getProjectsByAppid(appid);
 	}
 	
+	
+	@RequestMapping(value = "rest/projects")
+	public List<Projects> showAllProjects(){
+		return projectsService.showAllProjects();
+	}
 	
 	
 }
