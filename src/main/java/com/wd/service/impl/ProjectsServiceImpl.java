@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.wd.dao.ProjectsDao;
-import com.wd.mapper.ProjectsMapper;
 import com.wd.model.Projects;
 import com.wd.service.ProjectsService;
 

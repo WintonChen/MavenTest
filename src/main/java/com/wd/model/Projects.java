@@ -1,11 +1,9 @@
 package com.wd.model;
 
 import javax.validation.constraints.Pattern;
-import javax.xml.bind.annotation.XmlRootElement;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-@XmlRootElement(name = "project") //支持xml格式
 public class Projects {
 
 	@Pattern(regexp="(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{5,10}")

@@ -12,7 +12,7 @@ http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 	<context:property-placeholder location="classpath:jdbc.properties"/>
 
 	<!-- 自动扫描dao和service包(自动注入) -->
-	<context:component-scan base-package="com.wd.dao,com.wd.mapper,com.wd.service" />
+	<context:component-scan base-package="com.wd.dao,com.wd.service" />
 
 	<!-- 数据库连接池 -->
     <bean id="dataSource" 
@@ -58,7 +58,7 @@ http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 		<!-- 注入sqlSessionFactory -->
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
 		<!-- 给出需要扫描Dao接口包 -->
-		<property name="basePackage" value="com.wd.mapper,com.wd.dao" />
+		<property name="basePackage" value="com.wd.dao" />
 	</bean>
           
     
