@@ -3,7 +3,59 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.wd.dao.StrategyDao">
-    <select id="seletctOne" resultType="Strategy">
-    	
+    <select id="seletctByStrategyid" resultType="Strategy">
+    	select * from strategy where strategy_id = #{strategy_id}
     </select>
+    
+     <select id="selectList" resultType="Strategy">
+        select * from strategy
+    </select>
+    
+     <select id="selectByAppid" resultType="Strategy">
+        select * from strategy where appid = #{appid}
+    </select>
+    
+    <select id="selectByAppidAndStates" resultType="Strategy">
+        select * from strategy where appid = #{appid} and states = #{states}
+    </select>
+    
+    <insert id="insert" parameterType="Strategy">
+		insert into strategy
+		(strategy_id,appid,name,versionCode,versionName,time,force,changelog,url,states,downloads )
+		values
+		(#{strategy_id},#{appid},#{name},#{versionCode},#{versionName},#{time},#{force},#{changelog},#{url},#{states},#{downloads}|)
+	</insert>
+
+	<insert id="insertList" parameterType="java.util.List">
+		insert into strategy
+		(strategy_id,appid,name,versionCode,versionName,time,force,changelog,url,states,downloads )
+		values
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(#{item.strategy_id},#{item.appid},#{item.name},#{item.versionCode},#{item.versionName},#{item.time},#{item.force},#{item.changelog},#{item.url},#{item.states},#{item.downloads}|)
+		</foreach>
+	</insert>
+
+	<update id="update" parameterType="Strategy">
+		update strategy set
+		strategy_id =#{strategy_id},
+		appid = #{appid},
+		name = #{name},
+		versionCode = #{versionCode},
+		versionName = #{versionName},
+		time = #{time},
+		force = #{force},
+		changelog = #{changelog}
+		url = #{url}
+		states = #{states}
+		downloads = #{downloads}
+		where strategy_id = #{strategy_id}
+	</update>
+
+	<delete id="delete" parameterType="String">
+		delete from strategy where
+		strategy_id = #{strategy_id}
+	</delete>
+    
+    
 </mapper>

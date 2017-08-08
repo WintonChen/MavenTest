@@ -19,7 +19,7 @@ public class PageHelperTest {
 	
 	@Test
 	public void test(){
-		PageInfo<Projects> pageInfo = projectsService.getProjectsByPage(2, 2);
+		PageInfo<Projects> pageInfo = projectsService.getByPage(2, 2);
 		
 		List<Projects> list = pageInfo.getList();
 		

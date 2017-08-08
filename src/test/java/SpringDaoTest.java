@@ -27,11 +27,11 @@ public class SpringDaoTest {
 	@Test
 	public void test1(){
 		Projects projects1 = new Projects();
-		projects1.setAppid("008");
-		projects1.setName("008");
+		projects1.setAppid("010");
+		projects1.setName("010");
 		Projects projects2 = new Projects();
-		projects2.setAppid("009");
-		projects2.setName("009");
+		projects2.setAppid("011");
+		projects2.setName("011");
 		List<Projects> projects_list = new ArrayList<Projects>();
 		projects_list.add(projects1);
 		projects_list.add(projects2);

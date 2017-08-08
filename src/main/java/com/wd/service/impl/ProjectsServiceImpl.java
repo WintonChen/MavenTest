@@ -15,14 +15,14 @@ import com.wd.service.ProjectsService;
 @Service
 public class ProjectsServiceImpl implements ProjectsService {
 
-	private static final Logger logger = Logger.getLogger(ProjectsServiceImpl.class);
+	private  Logger logger = Logger.getLogger(this.getClass());
 	
 	@Autowired
 	private ProjectsDao projectsDao;
 	
 
 	@Override
-	public List<Projects> showAllProjects() {
+	public List<Projects> showAll() {
 		List<Projects> list = projectsDao.selectList();
 		Projects e = new Projects();
 		e.setAppid("3475672383");
@@ -35,7 +35,7 @@ public class ProjectsServiceImpl implements ProjectsService {
 
 
 	@Override
-	public Projects getProjectsByAppid(String appid) {
+	public Projects getByAppid(String appid) {
 		Projects projects = projectsDao.selectOne(appid);
 		return projects;
 	}
@@ -43,7 +43,7 @@ public class ProjectsServiceImpl implements ProjectsService {
 
 
 	@Override
-	public PageInfo<Projects> getProjectsByPage(Integer pageNum, Integer pageSize) {
+	public PageInfo<Projects> getByPage(Integer pageNum, Integer pageSize) {
 		// TODO Auto-generated method stub
 		PageHelper.startPage(pageNum, pageSize); //开始分页
 		List<Projects> list = projectsDao.selectList(); //查询操作

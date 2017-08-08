@@ -3,34 +3,51 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.wd.dao.ProjectsDao">
-    <select id="selectOne" parameterType="String" resultType="Projects">
-        select * from projects where appid = #{appid}
-    </select>
-    
-     <select id="selectList" resultType="Projects">
-        select * from projects
-    </select>
-    
-    <insert id="insert" parameterType="Projects">
-    	insert into projects (appid,name,icon,platform,type,info,time,creator ) 
-    	values (#{appid},#{name},#{icon},#{platform},#{type},#{info},#{time},#{creator})
-    </insert>
-    
-    <update id="update" parameterType="Projects">
-    	update projects set
-    	appid = #{appid},
-    	name = #{name},
-    	icon = #{icon},
-    	platform = #{platform},
-    	type = #{type},
-    	info = #{info},
-    	time = #{time},
-    	creator = #{creator}
-    	where appid = #{appid}
-    </update>
-    
-    <delete id="delete" parameterType="String">
-    	delete from projects where appid = #{appid}
-    </delete>
-    
+	<select id="selectOne" parameterType="String" resultType="Projects">
+		select
+		* from projects where appid = #{appid}
+	</select>
+
+	<select id="selectList" resultType="Projects">
+		select * from projects
+	</select>
+
+	<insert id="insert" parameterType="Projects">
+		insert into projects
+		(appid,name,icon,platform,type,info,time,creator )
+		values
+		(#{appid},#{name},#{icon},#{platform},#{type},#{info},#{time},#{creator})
+	</insert>
+
+	<insert id="insertList" parameterType="java.util.List">
+		insert into projects (appid,name,icon,platform,type,info,time,creator
+		)
+		values
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(#{item.appid},#{item.name},#{item.icon},#{item.platform},#{item.type},#{item.info},#{item.time},#{item.creator})
+		</foreach>
+	</insert>
+
+	<update id="update" parameterType="Projects">
+		update projects set
+		appid =
+		#{appid},
+		name = #{name},
+		icon = #{icon},
+		platform = #{platform},
+		type =
+		#{type},
+		info = #{info},
+		time = #{time},
+		creator = #{creator}
+		where appid
+		= #{appid}
+	</update>
+
+	<delete id="delete" parameterType="String">
+		delete from projects where
+		appid = #{appid}
+	</delete>
+
 </mapper>

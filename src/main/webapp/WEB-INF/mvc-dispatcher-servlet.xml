@@ -21,6 +21,7 @@
 
 	<!-- 配置静态资源 -->
 	<mvc:resources location="/static/" mapping="/static/**" />
+	
 
 	<!-- 3.配置jsp 显示ViewResolver -->
 	<bean

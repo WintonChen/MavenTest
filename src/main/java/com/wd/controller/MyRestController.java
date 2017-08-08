@@ -20,13 +20,13 @@ public class MyRestController {
 	
 	@RequestMapping(value = "rest/projects/{appid}")
 	public Projects getProjects(@PathVariable String appid){
-		return projectsService.getProjectsByAppid(appid);
+		return projectsService.getByAppid(appid);
 	}
 	
 	
 	@RequestMapping(value = "rest/projects")
 	public List<Projects> showAllProjects(){
-		return projectsService.showAllProjects();
+		return projectsService.showAll();
 	}
 	
 	

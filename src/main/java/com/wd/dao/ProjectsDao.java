@@ -14,7 +14,7 @@ public interface ProjectsDao {
 	 
 	 int insert(Projects projects);
 	 
-	 void insertList(List<Projects> projects_list);
+	 void insertList(List<Projects> list);
 	 
 	 int update(Projects projects);
 	 

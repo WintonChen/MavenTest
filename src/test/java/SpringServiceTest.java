@@ -21,7 +21,7 @@ public class SpringServiceTest {
 	
 	@Test
 	public void test(){
-		List<Projects> list = projectsService.showAllProjects();
+		List<Projects> list = projectsService.showAll();
 		
 		for (Projects projects : list) {
 			System.out.println(projects.getAppid());

@@ -19,7 +19,7 @@ public class JsonController {
 	
 	@RequestMapping(value = "{appid}",method = RequestMethod.GET)
 	public @ResponseBody Projects getProjects(@PathVariable String appid){
-		return projectsService.getProjectsByAppid(appid);
+		return projectsService.getByAppid(appid);
 	}
 	
 	// Spring基于类路径中的RequestMapping和Jackson jar自动处理JSON转换   

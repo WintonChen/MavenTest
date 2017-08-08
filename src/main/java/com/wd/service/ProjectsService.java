@@ -7,10 +7,10 @@ import com.wd.model.Projects;
 
 public interface ProjectsService {
 	
-	public List<Projects> showAllProjects();
+	public List<Projects> showAll();
 	
-	public Projects getProjectsByAppid(String appid);
+	public Projects getByAppid(String appid);
 	
-	public PageInfo<Projects> getProjectsByPage(Integer pageNum,Integer pageSize);
+	public PageInfo<Projects> getByPage(Integer pageNum,Integer pageSize);
 	
 }

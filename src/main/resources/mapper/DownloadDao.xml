@@ -3,6 +3,30 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.wd.dao.DownloadDao">
-    
-    
+
+	<select id="selectList" resultType="Download">
+		select * from download
+	</select>
+
+	<select id="seletctByStrategyid" parameterType="String"
+		resultType="Projects">
+		select
+		* from download where strategy_id = #{strategy_id}
+	</select>
+
+	<select id="seletctByTime" parameterType="String" resultType="Download">
+		select
+		* from download
+		<if
+			test="beginTime!=null and beginTime!='' and endTime!=null and endTime!=''">
+			where time between #{beginTime} AND #{endTime}
+		</if>
+	</select>
+
+	<insert id="insert" parameterType="Download">
+		insert into download
+		(strategy_id,time)
+		values
+		(#{strategy_id},#{time})
+	</insert>
 </mapper>
