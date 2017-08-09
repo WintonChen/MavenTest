@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.URLEncoder;
 import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
@@ -56,7 +57,7 @@ public class FileDownloadController {
 				if (file.exists()) {
 					// response.setContentType("application/force-download");//
 					// 设置强制下载不打开
-					response.addHeader("Content-Disposition", "attachment;fileName=" + fileName);// 设置文件名
+					response.addHeader("Content-Disposition", "attachment;fileName=" + URLEncoder.encode(fileName,"UTF-8").replaceAll("\\+", "%20"));// 设置文件名
 					byte[] buffer = new byte[1024];
 					FileInputStream fis = null;
 					BufferedInputStream bis = null;
@@ -108,65 +109,83 @@ public class FileDownloadController {
 
 		Strategy strategy = strategyService.getByStrategyidAndAppid(strategy_id, appid);
 		
+		logger.info(strategy.toString());
+		
 		String fileName = strategy.getUrl();
 		
-		logger.info("fileName:" + fileName);
-		if (fileName != null) {
+		String states = strategy.getStates();
+		
+		if(states.equals("open")){
+			logger.info("fileName:" + fileName);
+			if (fileName != null) {
 
-			try {
-				// 获取properties的属性。
-				Properties prop = new Properties();
-				InputStream in = this.getClass().getClassLoader().getResourceAsStream("path.properties");
-				prop.load(in);
-				// 获取真实物理路径
-				String realPath = prop.getProperty("realPath").trim();
- 
-				File file = new File(realPath, fileName);
+				try {
+					// 获取properties的属性。
+					Properties prop = new Properties();
+					InputStream in = this.getClass().getClassLoader().getResourceAsStream("path.properties");
+					prop.load(in);
+					// 获取真实物理路径
+					String realPath = prop.getProperty("realPath").trim();
+	 
+					File file = new File(realPath, fileName);
 
-				if (file.exists()) {
-					// response.setContentType("application/force-download");//
-					// 设置强制下载不打开
-					response.addHeader("Content-Disposition", "attachment;fileName=" + strategy.getName());// 设置文件名
-					byte[] buffer = new byte[1024];
-					FileInputStream fis = null;
-					BufferedInputStream bis = null;
-					try {
-						fis = new FileInputStream(file);
-						bis = new BufferedInputStream(fis);
-						OutputStream os = response.getOutputStream();
-						int i = bis.read(buffer);
-						while (i != -1) {
-							os.write(buffer, 0, i);
-							i = bis.read(buffer);
-						}
-					} catch (Exception e) {
-						// TODO: handle exception
-						e.printStackTrace();
-					} finally {
-						if (bis != null) {
-							try {
-								bis.close();
-							} catch (IOException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
+					//获取后缀
+					String postfix = fileName.substring(fileName.lastIndexOf(".")+1);
+					
+					String finalFileName = URLEncoder.encode(strategy.getName(),"UTF-8") + "." + postfix;
+					finalFileName = finalFileName.replaceAll("\\+", "%20"); //将加号还原为空格 
+					
+					logger.info(URLEncoder.encode(strategy.getName(),"UTF-8") + "." + postfix);
+					
+					if (file.exists()) {
+						// response.setContentType("application/force-download");//
+						// 设置强制下载不打开
+						response.addHeader("Content-Disposition", "attachment;fileName=" +finalFileName );// 设置文件名
+						byte[] buffer = new byte[1024];
+						FileInputStream fis = null;
+						BufferedInputStream bis = null;
+						try {
+							fis = new FileInputStream(file);
+							bis = new BufferedInputStream(fis);
+							OutputStream os = response.getOutputStream();
+							int i = bis.read(buffer);
+							while (i != -1) {
+								os.write(buffer, 0, i);
+								i = bis.read(buffer);
 							}
-						}
-						if (fis != null) {
-							try {
-								fis.close();
-							} catch (IOException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
+						} catch (Exception e) {
+							// TODO: handle exception
+							e.printStackTrace();
+						} finally {
+							if (bis != null) {
+								try {
+									bis.close();
+								} catch (IOException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+							}
+							if (fis != null) {
+								try {
+									fis.close();
+								} catch (IOException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
 							}
 						}
 					}
-				}
+					
+					strategy.setDownloads(strategy.getDownloads()+1);
+					strategyService.update(strategy);
 
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
+		
 		return null;
 
 	}

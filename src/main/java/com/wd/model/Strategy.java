@@ -79,6 +79,12 @@ public class Strategy {
 	public void setDownloads(int downloads) {
 		this.downloads = downloads;
 	}
+	@Override
+	public String toString() {
+		return "Strategy [strategy_id=" + strategy_id + ", appid=" + appid + ", name=" + name + ", versionCode="
+				+ versionCode + ", versionName=" + versionName + ", time=" + time + ", force=" + force + ", changelog="
+				+ changelog + ", url=" + url + ", states=" + states + ", downloads=" + downloads + "]";
+	}
 	
 	
 }

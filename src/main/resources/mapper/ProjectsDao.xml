@@ -31,8 +31,6 @@
 
 	<update id="update" parameterType="Projects">
 		update projects set
-		appid =
-		#{appid},
 		name = #{name},
 		icon = #{icon},
 		platform = #{platform},
@@ -41,8 +39,7 @@
 		info = #{info},
 		time = #{time},
 		creator = #{creator}
-		where appid
-		= #{appid}
+		where appid = #{appid}
 	</update>
 
 	<delete id="delete" parameterType="String">

@@ -19,11 +19,15 @@
         select * from strategy where appid = #{appid} and states = #{states}
     </select>
     
+    <select id="selectByStrategyidAndAppid" resultType="Strategy">
+        select * from strategy where appid = #{appid} and strategy_id = #{strategy_id}
+    </select>
+    
     <insert id="insert" parameterType="Strategy">
 		insert into strategy
 		(strategy_id,appid,name,versionCode,versionName,time,force,changelog,url,states,downloads )
 		values
-		(#{strategy_id},#{appid},#{name},#{versionCode},#{versionName},#{time},#{force},#{changelog},#{url},#{states},#{downloads}|)
+		(#{strategy_id},#{appid},#{name},#{versionCode},#{versionName},#{time},#{force},#{changelog},#{url},#{states},#{downloads})
 	</insert>
 
 	<insert id="insertList" parameterType="java.util.List">
@@ -32,22 +36,21 @@
 		values
 		<foreach collection="list" item="item" index="index"
 			separator=",">
-			(#{item.strategy_id},#{item.appid},#{item.name},#{item.versionCode},#{item.versionName},#{item.time},#{item.force},#{item.changelog},#{item.url},#{item.states},#{item.downloads}|)
+			(#{item.strategy_id},#{item.appid},#{item.name},#{item.versionCode},#{item.versionName},#{item.time},#{item.force},#{item.changelog},#{item.url},#{item.states},#{item.downloads})
 		</foreach>
 	</insert>
 
 	<update id="update" parameterType="Strategy">
 		update strategy set
-		strategy_id =#{strategy_id},
 		appid = #{appid},
 		name = #{name},
 		versionCode = #{versionCode},
 		versionName = #{versionName},
 		time = #{time},
 		force = #{force},
-		changelog = #{changelog}
-		url = #{url}
-		states = #{states}
+		changelog = #{changelog},
+		url = #{url},
+		states = #{states},
 		downloads = #{downloads}
 		where strategy_id = #{strategy_id}
 	</update>

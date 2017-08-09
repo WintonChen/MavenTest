@@ -2,6 +2,7 @@ package com.wd.dto;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URLEncoder;
 import java.util.Properties;
 
 import com.wd.model.Strategy;
@@ -27,17 +28,24 @@ public class UpdateMassege {
 			InputStream in = this.getClass().getClassLoader().getResourceAsStream("path.properties");
 			try {
 				prop.load(in);
-			} catch (IOException e) {
+			
+				// 获取真实物理路径
+				String downloadUrl = prop.getProperty("downloadUrl").trim();
+				
+				this.appid = strategy.getAppid();
+				String temp = downloadUrl+"?appid="+URLEncoder.encode(strategy.getAppid(),"UTF-8")+"&strategy_id="+
+				URLEncoder.encode(strategy.getStrategy_id()+"","UTF-8");
+				this.url = temp;
+				this.versionCode = strategy.getVersionCode();
+				this.updateMessage = strategy.getChangelog();
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				this.appid = "";
+				this.url = "";
+				this.versionCode = -1; //无更新信息
+				this.updateMessage = "";
 			}
-			// 获取真实物理路径
-			String downloadUrl = prop.getProperty("downloadUrl").trim();
-			
-			this.appid = strategy.getAppid();
-			this.url = downloadUrl+strategy.getUrl();
-			this.versionCode = strategy.getVersionCode();
-			this.updateMessage = strategy.getChangelog();
 		}else{
 			this.appid = "";
 			this.url = "";
