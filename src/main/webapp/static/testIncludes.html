@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>MyHtml.html</title>
+
+<meta name="keywords" content="keyword1,keyword2,keyword3">
+<meta name="description" content="this is my page">
+<meta name="content-type" content="text/html; charset=UTF-8">
+
+<!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+<script src="http://www.yiibai.com/js/angular.min.js"></script>
+</head>
+
+<body>
+	<h2>AngularJS Include示例</h2>
+	
+	<div ng-app="mainApp" ng-controller="studentController">
+	
+		<div ng-include="'main.html'"></div>
+		<div ng-include="'subjects.html'"></div>
+	</div>
+	
+	<script>
+		var mainApp = angular.module("mainApp", []);
+		
+		mainApp.controller("studentController", function($scope) {
+			$scope.student={
+				firstName:"周",
+				lastName:"杰伦",
+				fees:500,
+				subjects:[
+					{name:'物理',marks:78},
+					{name:'化学',marks:82},
+         			{name:'语文',marks:68},
+         			{name:'外语',marks:79},
+          			{name:'Java',marks:87}
+				],
+				fullName:function(){
+					var studentObject;				
+					studentObject = $scope.student;
+					return studentObject.firstName + " " + studentObject.lastName;
+				}
+			}
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>main.html</title>
+<meta name="content-type" content="text/html; charset=UTF-8">
+<!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+</head>
+<p>科目:</p>
+<table>
+	<tr>
+		<th>名字</th>
+		<th>标记</th>
+	</tr>
+	<tr ng-repeat="subject in student.subjects">
+		<td>{{ subject.name }}</td>
+		<td>{{ subject.marks }}</td>
+	</tr>
+</table>
+</body>
+</html>
