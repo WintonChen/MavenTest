@@ -5,7 +5,7 @@
 </head>
 <body>
 <h2>AngularJS HTML DOM 应用示例</h2>
-<div ng-app="">
+<div ng-app="mainApp">
 <table border="0">
 <tr>
    <td><input type="checkbox" ng-model="enableDisableButton">Disable Button</td>
@@ -25,6 +25,11 @@
 </tr>
 </table>
 </div>
+
+<script>
+var mainApp = angular.module("mainApp", []);
+</script>
+
 <script src="http://www.yiibai.com/js/angular.min.js"></script>
 </body>
 </html>
