@@ -10,6 +10,10 @@ import org.apache.mina.filter.codec.textline.LineDelimiter;
 import org.apache.mina.filter.codec.textline.TextLineDecoder;
 import org.apache.mina.filter.codec.textline.TextLineEncoder;
 
+/**
+ * 过滤器 
+ *
+ */
 public class MyCodeFactory implements ProtocolCodecFactory {
 	private final TextLineEncoder encoder;
 	private final TextLineDecoder decoder;
