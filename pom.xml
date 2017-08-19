@@ -190,10 +190,9 @@
 		<dependency>
 		    <groupId>org.apache.mina</groupId>
 		    <artifactId>mina-core</artifactId>
-		    <version>2.0.13</version>
-		     <type>bundle</type>  
-             <scope>compile</scope>
+		    <version>2.0.16</version>
 		</dependency>
+
 
 		
 		<!-- https://mvnrepository.com/artifact/org.apache.mina/mina-integration-beans -->
@@ -209,7 +208,7 @@
 		    <artifactId>mina-integration-spring</artifactId>
 		    <version>1.1.7</version>
 		</dependency>
-				
+		
 		
 		
 	</dependencies>

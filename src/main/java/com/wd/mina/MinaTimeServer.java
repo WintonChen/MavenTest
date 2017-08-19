@@ -23,7 +23,8 @@ public class MinaTimeServer {
 		// TODO Auto-generated method stub
 		IoAcceptor acceptor = new NioSocketAcceptor();
 
-		acceptor.getFilterChain().addLast("logger", new LoggingFilter());
+		LoggingFilter loggingFilter = new LoggingFilter();
+		acceptor.getFilterChain().addLast("logger", loggingFilter);
 		//现有的 TextLine 工厂因为它将为你处理基于文本的消息 (你无须去编写 codec 部分)。
 		acceptor.getFilterChain().addLast("codec",
 				new ProtocolCodecFilter(new TextLineCodecFactory(Charset.forName("GBK"))));
@@ -40,6 +41,8 @@ public class MinaTimeServer {
 		
 		
 //		acceptor.getManagedSessions();
+		
+		
 	}
 
 }
