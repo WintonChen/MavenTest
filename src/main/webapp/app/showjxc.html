@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>showjxc.html</title>
+<meta name="content-type" content="text/html; charset=UTF-8">
+
+<!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+<script src="../js/angular.js"></script>
+<script src="../js/angular-route.min.js"></script>
+<script src="../js/angular-ui-router.min.js"></script>
+
+<style type="text/css">
+table, th, td {
+	border: 1px solid grey;
+	border-collapse: collapse;
+	padding: 5px;
+}
+
+table tr:nth-child(odd) {
+	background-color: #f2f2f2;
+}
+
+table tr:nth-child(even) {
+	background-color: #ffffff;
+}
+</style>
+
+</head>
+
+<body>
+	<h2>JXC服务器列表</h2>
+
+	<div ng-app="mainApp" ng-controller="jxcController">
+		<table>
+			<tr>
+				<th>id</th>
+				<th>address</th>
+			</tr>
+			<tr ng-repeat="jxc in jxcs track by $index">
+				<td>{{jxc.id}}</td>
+				<td>{{jxc.address}}</td>
+				<td><button ng-click="visitJXC($index)">进入</button></td>
+			</tr>
+		</table>
+	</div>
+
+	<script>
+		var mainApp = angular.module("mainApp", ['ui.router','ngRoute']);
+	
+		mainApp.config([ '$routeProvider', '$stateProvider', function($routeProvider, $stateProvider) {
+			$stateProvider
+				.state('visitjxc', {
+					params : {
+						"id" : null,
+						"address" : null
+					},
+					url: 'visitjxc',
+					templateUrl : 'visitjxc.html',
+					controller : 'visitCtrl'
+				});
+		} ]);
+	
+		mainApp.controller("jxcController", function($scope, $http,$state) {
+			var url = "../rest/getSessionsList";
+			$http.get(url).then(function onSuccess(response){
+				$scope.jxcs = response.data;
+			});
+	
+			$scope.visitJXC = function(index) {
+				var jxc = $scope.jxcs[index];
+	
+				alert("id:"+jxc.id+"\n"+"address:"+jxc.address);
+	
+				$state.go("visitjxc", {
+					id : jxc.id,
+					name : jxc.address
+				});
+			};
+	
+		});
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>index.html</title>
+
+<meta name="keywords" content="keyword1,keyword2,keyword3">
+<meta name="description" content="this is my page">
+<meta name="content-type" content="text/html; charset=UTF-8">
+
+<!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+
+<script src="../js/angular.js"></script>
+<script src="../js/angular-ui-router.min.js"></script>
+<script src="helloworld.js"></script>
+
+<style>
+.active {
+	color: red;
+	font-weight: bold;
+}
+</style>
+</head>
+
+<body ng-app="helloworld">
+
+	<a ui-sref="hello" ui-sref-active="active">Hello</a>
+	<a ui-sref="about" ui-sref-active="active">About</a>
+
+	<ui-view></ui-view>
+</body>
+</html>

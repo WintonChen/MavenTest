@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>index.html</title>
+
+<meta name="keywords" content="keyword1,keyword2,keyword3">
+<meta name="description" content="this is my page">
+<meta name="content-type" content="text/html; charset=UTF-8">
+
+<link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
+<script src="../js/angular.js"></script>
+<script src="../js/angular-ui-router.min.js"></script>
+
+<script src="app.js"></script>
+<script src="components/home.js"></script>
+<script src="components/console.js"></script>
+<script src="services/ConsoleService.js"></script>
+
+<style>
+.active {
+	color: red;
+	font-weight: bold;
+}
+</style>
+</head>
+
+<body ng-app="myApp">
+	
+	<h2>进销存后台管理</h2>
+	
+	<a ui-sref="home" ui-sref-active="active">首页</a>
+    <a ui-sref="console" ui-sref-active="active">控制台</a>
+	
+	<ui-view></ui-view>
+</body>
+</html>

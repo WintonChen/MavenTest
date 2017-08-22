@@ -1,6 +1,8 @@
 package com.wd.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -31,5 +33,50 @@ public class MinaController {
 		}  
 		
 		return result;
+	}
+	
+	@RequestMapping(value = "rest/getSessionsList")
+	public List<Jxc> getSessionsList(){
+		
+		List<Jxc> list = new ArrayList<Jxc>();
+		
+		Map<Long, IoSession> map = ioAcceptor.getManagedSessions();
+		
+		for (Entry<Long, IoSession> entry : map.entrySet()) {  
+			  
+		    System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue().getRemoteAddress().toString()); 
+		    Jxc jxc = new Jxc();
+		    jxc.setId(entry.getKey());
+		    jxc.setAddress(entry.getValue().getRemoteAddress().toString());
+		    list.add(jxc);
+		}  
+		
+//		 try {
+////			Thread.sleep(10000);
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		
+		return list;
+	}
+	
+	class Jxc{
+		Long id;
+		String address;
+		public Long getId() {
+			return id;
+		}
+		public void setId(Long id) {
+			this.id = id;
+		}
+		public String getAddress() {
+			return address;
+		}
+		public void setAddress(String address) {
+			this.address = address;
+		}
+		
+		
 	}
 }

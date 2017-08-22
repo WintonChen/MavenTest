@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>main.html</title>
+<meta name="content-type" content="text/html; charset=UTF-8">
+
+<style type="text/css">
+table, th, td {
+	border: 1px solid grey;
+	border-collapse: collapse;
+	padding: 5px;
+}
+
+table tr:nth-child(odd) {
+	background-color: #f2f2f2;
+}
+
+table tr:nth-child(even) {
+	background-color: #ffffff;
+}
+</style>
+
+</head>
+<body>
+	<h2>JXC服务器列表</h2>
+	<table>
+		<tr>
+			<th>id</th>
+			<th>address</th>
+		</tr>
+		<tr ng-repeat="jxc in jxcs track by $index">
+			<td>{{jxc.id}}</td>
+			<td>{{jxc.address}}</td>
+			<td><button ng-click="visitJXC($index)">进入</button></td>
+		</tr>
+	</table>
+
+</body>
+</html>
