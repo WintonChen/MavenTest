@@ -3,7 +3,7 @@
  */
 myApp = angular.module('myApp', [ 'ui.router' ]);
 
-myApp.config(function($stateProvider,$urlRouterProvider) {
+myApp.config(function($stateProvider, $urlRouterProvider) {
 
 	var states = [
 
@@ -29,11 +29,9 @@ myApp.config(function($stateProvider,$urlRouterProvider) {
 		{
 			name : 'detail',
 			url : '/detail',
+			params:{"id":null,"address":null},
 			// Using component: instead of template:
-			component : 'detail',
-			resolve : {
-				
-			}
+			component : 'detail'
 		}
 
 
@@ -44,9 +42,9 @@ myApp.config(function($stateProvider,$urlRouterProvider) {
 	states.forEach(function(state) {
 		$stateProvider.state(state);
 	});
-	
-	 $urlRouterProvider
-     .otherwise('home');
-	
+
+	$urlRouterProvider
+		.otherwise('home');
+
 
 });

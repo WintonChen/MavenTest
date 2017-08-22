@@ -28,10 +28,10 @@ table tr:nth-child(even) {
 			<th>id</th>
 			<th>address</th>
 		</tr>
-		<tr ng-repeat="jxc in $ctrl.jxclist track by $index">
+		<tr ng-repeat="jxc in $ctrl.jxclist">
 			<td>{{jxc.id}}</td>
 			<td>{{jxc.address}}</td>
-			<td><button ng-click="">进入</button></td>
+			<td><button ng-click="visitJXC(jxc.id,jxc.address)">进入</button></td>
 		</tr>
 	</table>
 
