@@ -210,6 +210,26 @@
 		</dependency>
 		
 		
+		<!-- Ehcache -->
+		<dependency>
+		      <groupId>org.ehcache</groupId>
+		      <artifactId>ehcache</artifactId>
+		      <version>3.3.1</version>
+   		</dependency>   
+		
+		<dependency>
+		      <groupId>javax.cache</groupId>
+		      <artifactId>cache-api</artifactId>
+		      <version>1.0.0</version>
+    	</dependency>
+    	
+    	<!-- https://mvnrepository.com/artifact/org.springframework/spring-context-support -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-context-support</artifactId>
+		    <version>4.3.9.RELEASE</version>
+		</dependency>
+    	
 		
 	</dependencies>
 	<build>
