@@ -19,4 +19,6 @@ angular.module('myApp').controller('consoleCtrl', function($scope,$state) {
 			address : address
 		});
 	};
+	
+	
 })
