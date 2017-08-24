@@ -3,15 +3,18 @@
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 xmlns:context="http://www.springframework.org/schema/context" 
 xmlns:cache="http://www.springframework.org/schema/cache"
+xmlns:p="http://www.springframework.org/schema/p"
+xmlns:mvc="http://www.springframework.org/schema/mvc" 
 xsi:schemaLocation="
 http://www.springframework.org/schema/beans 
 http://www.springframework.org/schema/beans/spring-beans-4.3.xsd 
 http://www.springframework.org/schema/context 
 http://www.springframework.org/schema/context/spring-context-4.3.xsd
 http://www.springframework.org/schema/cache
-http://www.springframework.org/schema/cache/spring-cache.xsd">
+http://www.springframework.org/schema/cache/spring-cache.xsd
+http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-	<!-- 引入属性文件 -->
+	<!-- 引入属性文件 -->  
 	<context:property-placeholder location="classpath:jdbc.properties"/>
 
 	<!-- 自动扫描dao和service包(自动注入) -->
@@ -64,10 +67,21 @@ http://www.springframework.org/schema/cache/spring-cache.xsd">
 		<property name="basePackage" value="com.wd.dao" />
 	</bean>
           
+    
+    <mvc:annotation-driven>
+	    <mvc:message-converters register-defaults="true">
+	        <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+	            <constructor-arg value="UTF-8" />
+	        </bean>
+	    </mvc:message-converters>
+   </mvc:annotation-driven>
+          
+          
+          
           
  	<!-- 整合mina -->
  	<!-- The IoHandler implementation -->
- 	<bean id="serverHandler" class="com.wd.mina.TimeServerHandler">
+ 	<bean id="serverHandler" class="com.wd.mina.MyHandler">
     </bean>
     
     <!--编解码-->
@@ -120,13 +134,15 @@ http://www.springframework.org/schema/cache/spring-cache.xsd">
 	</bean>
           
       <!-- 整合ehcache -->    
-      <!--启用缓存注解-->
-    <cache:annotation-driven cache-manager="cacheManager"/>
-    <bean id="cacheManagerFactory" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
-        <property name="configLocation" value="classpath:ehcache.xml"/>
-    </bean>
-    <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
-        <property name="cacheManager" ref="cacheManagerFactory"/>
-    </bean>
+	  <bean id="ehcache" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+	    <property name="configLocation" value="classpath:ehcache.xml"/>
+	  </bean>
+
+	  <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
+	    <property name="cacheManager" ref="ehcache"/>
+	  </bean>
+
+	  <!-- 启用缓存注解开关 -->
+	  <cache:annotation-driven cache-manager="cacheManager"/>
           
 </beans>

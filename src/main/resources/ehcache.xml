@@ -1,4 +1,6 @@
-<ehcache>
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd">
     <!--   
         diskStore ：指定数据存储位置，可指定磁盘中的文件夹位置   <diskStore path="E:/cachetmpdir"/> 
         defaultCache ： 默认的管理策略  
@@ -24,29 +26,27 @@
             LRU ，Least Recently Used(最近最少使用). (ehcache 默认值).缓存的元素有一个时间戳，当缓存容量满了，而又需要腾出地方来缓存新的元素的时候，那么现有缓存元素中时间戳离当前时间最远的元素将被清出缓存。  
 -->  
  
-    <!-- 指定一个文件目录，当EhCache把数据写到硬盘上时，将把数据写到这个文件目录下 -->
-    <diskstore path="java.io.tmpdir">
- 
-    <!-- 设定缓存的默认数据过期策略 -->
-    <defaultcache 
-	    diskexpirythreadintervalseconds="120" 
-	    diskpersistent="false" 
-	    eternal="false" 
-	    maxelementsinmemory="10000" 
-	    overflowtodisk="true" 
-	    timetoidleseconds="10" 
-	    timetoliveseconds="20">
- 
-	    <!-- cache元素是ehcache元素的子元素，一个cache元素就代表一个Ehcache对象的定义 -->        
-	    <cache 
-	    name="cacheTest" 
-	    eternal="false" 
-	    maxelementsinmemory="1000" 
-	    overflowtodisk="true" 
-	    timetoidleseconds="10" 
-	    timetoliveseconds="20">
-	 	</cache>
- 	</defaultcache>
- 	
- 	</diskstore>
- </ehcache>
+  <!-- 磁盘缓存位置 -->
+  <diskStore path="java.io.tmpdir/ehcache"/>
+
+  <!-- 默认缓存 -->
+  <defaultCache
+          maxEntriesLocalHeap="10000"
+          eternal="false"
+          timeToIdleSeconds="120"
+          timeToLiveSeconds="120"
+          maxEntriesLocalDisk="10000000"
+          diskExpiryThreadIntervalSeconds="120"
+          memoryStoreEvictionPolicy="LRU">
+    <persistence strategy="localTempSwap"/>
+  </defaultCache>
+
+  <cache name="userCache"
+         maxElementsInMemory="1000"
+         eternal="false"
+         timeToIdleSeconds="120"
+         timeToLiveSeconds="120"
+         maxEntriesLocalDisk="10000000"
+         overflowToDisk="false"
+         memoryStoreEvictionPolicy="LRU"/>
+</ehcache>

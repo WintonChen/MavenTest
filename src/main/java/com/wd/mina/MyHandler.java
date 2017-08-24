@@ -1,11 +1,22 @@
 package com.wd.mina;
 
+
 import org.apache.mina.core.service.IoHandlerAdapter;
 import org.apache.mina.core.session.IdleStatus;
 import org.apache.mina.core.session.IoSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.Cache;
+import org.springframework.cache.ehcache.EhCacheCacheManager;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.wd.model.ResponseModel;
+
 
 public class MyHandler extends IoHandlerAdapter {
 
+	@Autowired 
+	EhCacheCacheManager cacheManager;
+	
 	@Override
 	public void exceptionCaught(IoSession session, Throwable cause) throws Exception {
 		cause.printStackTrace();
@@ -14,8 +25,18 @@ public class MyHandler extends IoHandlerAdapter {
 
 	@Override
 	public void messageReceived(IoSession session, Object message) throws Exception {
-		// TODO Auto-generated method stub
-		super.messageReceived(session, message);
+	    String str = message.toString();
+        System.out.println("message:"+str);
+    
+        ObjectMapper mapper = new ObjectMapper(); //转换器  
+        
+        ResponseModel rm;
+        rm = mapper.readValue(str, ResponseModel.class);      //json转java对象 
+        Cache cache = cacheManager.getCache("userCache");
+        cache.put(rm.getResponseCode(), rm.getResult());
+        
+        
+        
 	}
 
 	 @Override
