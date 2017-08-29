@@ -14,9 +14,11 @@ import org.apache.mina.core.session.IoSession;
 import org.apache.mina.transport.socket.nio.NioSocketAcceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.ehcache.EhCacheCacheManager;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.async.DeferredResult;
 import org.springframework.web.context.request.async.WebAsyncTask;
@@ -78,6 +80,16 @@ public class MinaController {
 
 		return list;
 	}
+	
+	@RequestMapping(value = "rest/receive",method = RequestMethod.POST)
+	public void receive(@RequestParam("responseCode") String responseCode,
+			@RequestParam("result") String result){
+		
+		 System.out.println(responseCode);
+         System.out.println(result);
+		 Cache cache = cacheManager.getCache("userCache");
+         cache.put(responseCode, result);
+	}
 
 	//异步方法
 	@RequestMapping(value = "rest/send",method = RequestMethod.POST)
@@ -129,12 +141,16 @@ public class MinaController {
 
         WebAsyncTask asyncTask = new WebAsyncTask(60000, callable);
         asyncTask.onTimeout(
+        		
                 new Callable<ResponseModel>() {
+                	
                     public ResponseModel call() throws Exception {
-                    	ResponseModel responseModel = new ResponseModel();
-                    	responseModel.setResponseCode(requestCode);
-                    	responseModel.setResult("Timeout");
-                        return responseModel;
+                    	
+                    	throw new ResourceNoContentException();
+//                    	ResponseModel responseModel = new ResponseModel();
+//                    	responseModel.setResponseCode(requestCode);
+//                    	responseModel.setResult("Timeout");
+//                        return responseModel;
                     }
                 }
         );
@@ -142,6 +158,12 @@ public class MinaController {
        return asyncTask;
 	}
 	
+	//定义一个自定义异常，抛出时返回状态码 204 No Content 
+	//服务器成功处理了请求，没有返回任何内容
+	 @ResponseStatus(value = HttpStatus.NO_CONTENT)
+	 public class ResourceNoContentException extends RuntimeException {
+	     
+	 }
 	
 	//缺点，多个连接等待时会卡死
 	@RequestMapping(value = "rest/send2",method = RequestMethod.POST)

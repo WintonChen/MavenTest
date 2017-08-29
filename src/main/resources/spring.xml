@@ -88,7 +88,9 @@ http://www.springframework.org/schema/mvc http://www.springframework.org/schema/
     <bean id="codecFilter" class="org.apache.mina.filter.codec.ProtocolCodecFilter">
         <constructor-arg>
             <!--构造函数的参数传入自己实现的对象-->
-            <bean class="com.wd.mina.MyCodeFactory"></bean>
+            <bean class="com.wd.mina.MyCodeFactory">
+            	
+            </bean>
         </constructor-arg>
     </bean>
     

@@ -30,12 +30,18 @@ public class MyHandler extends IoHandlerAdapter {
     
         ObjectMapper mapper = new ObjectMapper(); //转换器  
         
-        ResponseModel rm;
-        rm = mapper.readValue(str, ResponseModel.class);      //json转java对象 
-        Cache cache = cacheManager.getCache("userCache");
-        cache.put(rm.getResponseCode(), rm.getResult());
-        
-        
+        try {
+        	 ResponseModel rm;
+             rm = mapper.readValue(str, ResponseModel.class);      //json转java对象 
+             Cache cache = cacheManager.getCache("userCache");
+             cache.put(rm.getResponseCode(), rm.getResult().toString());
+             
+             System.out.println(rm.getResponseCode());
+             System.out.println(rm.getResult().toString());
+		} catch (Exception e) {
+			System.out.println("bad format");
+			e.printStackTrace();
+		}
         
 	}
 

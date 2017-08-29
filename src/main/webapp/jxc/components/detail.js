@@ -33,9 +33,15 @@ angular.module('myApp').controller('detailCtrl'
 					return str.join("&");
 				}
 			}).then(function(response) {
-				console.log(response.status);
-				console.log(response.data);
-				$scope.messages = response.data;
+				if(response.status==200){
+					console.log(response.status);
+					console.log(response.data);
+					$scope.messages = response.data;
+				}else if(response.status==204){
+					console.log(response.status);
+					$scope.messages = "No Content";
+				}
+				
 			});
 
 		}

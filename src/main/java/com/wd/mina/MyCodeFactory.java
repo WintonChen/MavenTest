@@ -20,11 +20,16 @@ public class MyCodeFactory implements ProtocolCodecFactory {
 
 	public MyCodeFactory() {
 		this(Charset.forName("GBK"));
+		setEncoderMaxLineLength(100*1024*1024);  //自定义最大长度
+		setDecoderMaxLineLength(100*1024*1024);
 	}
 
 	public MyCodeFactory(Charset charset) {
+//		encoder = new TextLineEncoder(charset, LineDelimiter.UNIX);
+//		decoder = new TextLineDecoder(charset, LineDelimiter.AUTO);
+		//自定义截取尾部
 		encoder = new TextLineEncoder(charset, LineDelimiter.UNIX);
-		decoder = new TextLineDecoder(charset, LineDelimiter.AUTO);
+		decoder = new TextLineDecoder(charset, new LineDelimiter("!@#"));
 	}
 
 	public ProtocolDecoder getDecoder(IoSession arg0) throws Exception {
